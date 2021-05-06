@@ -19,7 +19,7 @@ public class ConnectionUtility {
 		
 		return DriverManager.getConnection(url, username, password);
 	}
-	
+	/*
 	public static void main(String[] args) {
 		try(Connection conn = ConnectionUtility.getConnection()) {
 			System.out.println("Connection successful!");
@@ -27,4 +27,5 @@ public class ConnectionUtility {
 			e.printStackTrace();
 		}
 	}
+	*/
 }

@@ -4,8 +4,8 @@ public class Accounts {
 
 	private int accountId; // primary key
 	private double balance;  // not null
-	private AccountStatus status;
-	private AccountType type;
+	private String status;
+	private String type;
 	
 	public Accounts() {
 		super();
@@ -28,19 +28,19 @@ public class Accounts {
 		this.balance = balance;
 	}
 
-	public AccountStatus getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(AccountStatus status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
-	public AccountType getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(AccountType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
@@ -85,8 +85,7 @@ public class Accounts {
 
 	@Override
 	public String toString() {
-		return "Accounts [accountId=" + accountId + ", balance=" + balance + ", status=" + status + ", type=" + type
-				+ "]";
+		return "Account Number:" + accountId + ", Balance:" + balance + ", Status:" + status + ", Type:" + type;
 	}
 	
 	

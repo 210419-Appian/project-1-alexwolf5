@@ -13,12 +13,4 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 
-	<servlet>
-	
-	</servlet>
-
-	<servlet-mapping>
-	
-	</servlet-mapping>
-
 </web-app>

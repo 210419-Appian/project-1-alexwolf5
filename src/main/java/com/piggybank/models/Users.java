@@ -1,7 +1,5 @@
 package com.piggybank.models;
 
-import javax.management.relation.Role;
-
 public class Users {
 		  
 	private int userId; // primary key
@@ -10,8 +8,9 @@ public class Users {
 	private String firstName; // not null
 	private String lastName; // not null
 	private String email; // not null
-	private Role role;
-
+	private String role;
+	
+	
 	public Users() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -65,11 +64,11 @@ public class Users {
 		this.email = email;
 	}
 
-	public Role getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(Role role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 
@@ -133,8 +132,8 @@ public class Users {
 
 	@Override
 	public String toString() {
-		return "Users [userId=" + userId + ", username=" + username + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", email=" + email + ", role=" + role + "]";
+		return "UserId:" + userId + ", Username:" + username + ", Password:" + password + ", First Name:"
+				+ firstName + ", Last Name:" + lastName + ", Email:" + email + ", Role:" + role;
 	}
 	
 	
