@@ -22,7 +22,7 @@ public class Register extends Users{
 		setUsername(input.nextLine());
 		System.out.printf("Please enter your desired password: ");
 		setPassword(input.nextLine());
-		
+////////////////////////////
 		UsersDAO reg = new UsersDAOImpl();
 		
 		reg.register(getUsername(), getPassword(), getFirstName(), getLastName(), getEmail());
