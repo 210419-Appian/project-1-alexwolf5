@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.piggybank.models.Accounts;
 import com.piggybank.models.Users;
 import com.piggybank.utilities.ConnectionUtility;
 
@@ -13,7 +14,7 @@ public class UsersDAOImpl implements UsersDAO {
 	@Override
 	public void register(String username, String password, String firstname, String lastname, String email) {
 		try(Connection conn = ConnectionUtility.getConnection()){
-			
+
 			String sql0 = "SELECT userid FROM users ORDER BY userid DESC LIMIT 1;";
 			Statement statement0 = conn.createStatement();
 			ResultSet result0 = statement0.executeQuery(sql0);
@@ -36,19 +37,11 @@ public class UsersDAOImpl implements UsersDAO {
 				user.setEmail(email);
 				user.setUsername(username);
 				user.setPassword(password);
-				
-				System.out.println("Success!");
-				return ;
-			}
-			else {
-				System.out.println("Failed!");
-				return;
 			}
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return;
 	}
 
 	@Override
@@ -66,14 +59,13 @@ public class UsersDAOImpl implements UsersDAO {
 				user.setUserId(result.getInt("userid"));
 				user.setFirstName(result.getString("firstname"));
 				user.setLastName(result.getString("lastname"));
-				user.setRole(result.getString("role"));
+				user.setRole(result.getString("userrole"));
 				user.setEmail(result.getString("email"));
 				user.setUsername(result.getString("username"));
 				user.setPassword(result.getString("password"));
+				userID = user.getUserId();
 			}
-			
-			return userID;
-			
+			return userID;		
 	} catch(SQLException e) {
 		e.printStackTrace();
 	}
@@ -90,15 +82,10 @@ public class UsersDAOImpl implements UsersDAO {
 				Users user = new Users();
 				user.setUsername(username);
 				return;
-			}
-			
-			
+			}	
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-
-		
-		
+		}	
 	}
 
 	@Override
@@ -111,13 +98,10 @@ public class UsersDAOImpl implements UsersDAO {
 				Users user = new Users();
 				user.setPassword(password);
 				return;
-			}
-			
-			
+			}	
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	@Override
@@ -176,4 +160,21 @@ public class UsersDAOImpl implements UsersDAO {
 		}
 		
 	}
+
+	@Override
+	public int checkUsernameAvailability(String username) {
+		int r = 0;
+		try(Connection conn = ConnectionUtility.getConnection()) {
+			String sql = "SELECT username FROM users WHERE username = '" + username + "';";
+			Statement statement = conn.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			if (result.next() == false) {    
+			    r = 1; 
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return r;
+	}
+
 }

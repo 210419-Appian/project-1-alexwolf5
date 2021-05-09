@@ -11,5 +11,6 @@ public interface UsersDAO {
 	public void newFirstname (int userId, String firstname);
 	public void newLastname (int userId, String lastname);
 	public void newEmail (int userId, String email);
-
+	public int checkUsernameAvailability(String username);
+	
 }
