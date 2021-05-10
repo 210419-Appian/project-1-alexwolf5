@@ -27,4 +27,8 @@ public class UserService {
 	public String getRole(int userId) {
 		return udao.getRole(userId);
 	}
+	
+	public void newDetails (int userId, String username, String password, String firstname, String lastname, String email, String role) {
+		udao.newDetails(userId, username, password, firstname, lastname, email, role);
+	}
 }

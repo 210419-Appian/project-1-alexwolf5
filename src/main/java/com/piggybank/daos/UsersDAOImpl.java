@@ -75,93 +75,17 @@ public class UsersDAOImpl implements UsersDAO {
 	}
 
 	@Override
-	public void newUsername(int userId, String username) {
+	public void newDetails(int userId, String username, String password, String firstname, String lastname, String email, String role) {
 		try(Connection conn = ConnectionUtility.getConnection()) {
-			String sql = "UPDATE users SET username = '" + username + "' WHERE userid = " + userId + ";";
+			String sql = "UPDATE users SET username = '" + username + "', password = '" + password + "', firstname = '" + firstname + "', lastname = '" + lastname + "', email = '" + email + "', userrole = '" + role + "' WHERE userid = " + userId + ";";
 			Statement statement = conn.createStatement();
-			int i = statement.executeUpdate(sql);
-			if (i > 0) {
-				Users user = new Users();
-				user.setUsername(username);
-				return;
-			}	
+			statement.executeUpdate(sql);
+			return;	
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
 	}
 
-	@Override
-	public void newPassword(int userId, String password) {
-		try(Connection conn = ConnectionUtility.getConnection()) {
-			String sql = "UPDATE users SET username = '" + password + "' WHERE userid = " + userId + ";";
-			Statement statement = conn.createStatement();
-			int i = statement.executeUpdate(sql);
-			if (i > 0) {
-				Users user = new Users();
-				user.setPassword(password);
-				return;
-			}	
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void newFirstname(int userId, String firstname) {
-		try(Connection conn = ConnectionUtility.getConnection()) {
-			String sql = "UPDATE users SET username = '" + firstname + "' WHERE userid = " + userId + ";";
-			Statement statement = conn.createStatement();
-			int i = statement.executeUpdate(sql);
-			if (i > 0) {
-				Users user = new Users();
-				user.setFirstName(firstname);
-				return;
-			}
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-	}
-
-	@Override
-	public void newLastname(int userId, String lastname) {
-		try(Connection conn = ConnectionUtility.getConnection()) {
-			String sql = "UPDATE users SET username = '" + lastname + "' WHERE userid = " + userId + ";";
-			Statement statement = conn.createStatement();
-			int i = statement.executeUpdate(sql);
-			if (i > 0) {
-				Users user = new Users();
-				user.setLastName(lastname);
-				return;
-			}
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-	}
-
-	@Override
-	public void newEmail(int userId, String email) {
-		try(Connection conn = ConnectionUtility.getConnection()) {
-			String sql = "UPDATE users SET username = '" + email + "' WHERE userid = " + userId + ";";
-			Statement statement = conn.createStatement();
-			int i = statement.executeUpdate(sql);
-			if (i > 0) {
-				Users user = new Users();
-				user.setEmail(email);
-				return;
-			}
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-	}
 
 	@Override
 	public int checkUsernameAvailability(String username) {
