@@ -1,5 +1,8 @@
 package com.piggybank.models;
 
+import com.piggybank.daos.UsersDAO;
+import com.piggybank.daos.UsersDAOImpl;
+
 public class Users {
 		  
 	private int userId; // primary key
@@ -10,10 +13,28 @@ public class Users {
 	private String email; // not null
 	private String role;
 	
+	static UsersDAO udao = new UsersDAOImpl();
+	
+	public static Users findByUsername(String username) {
+		
+		return udao.findByUsername(username);
+	}
 	
 	public Users() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	public Users(int userId, String username, String password, String firstname, String lastname, String email, String role) {
+		super();
+		this.userId = userId;
+		this.username = username;
+		this.password = password;
+		this.firstName = firstname;
+		this.lastName = lastname;
+		this.email = email;
+		this.role = role;
+		
 	}
 
 	public int getUserId() {

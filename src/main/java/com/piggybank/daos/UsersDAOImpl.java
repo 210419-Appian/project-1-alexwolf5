@@ -27,7 +27,7 @@ public class UsersDAOImpl implements UsersDAO {
 			
 			Statement statement = conn.createStatement();
 			int i = statement.executeUpdate(sql);
-			
+			/*
 			if (i > 0) {
 				Users user = new Users();
 				user.setUserId(userID);
@@ -38,7 +38,7 @@ public class UsersDAOImpl implements UsersDAO {
 				user.setUsername(username);
 				user.setPassword(password);
 			}
-			
+			*/
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -55,6 +55,7 @@ public class UsersDAOImpl implements UsersDAO {
 			ResultSet result = statement.executeQuery(sql);
 			
 			while (result.next()) {
+				//Users user = new Users(result.getInt("userid"), result.getString("username"), result.getString("password"), result.getString("firstname"), result.getString("lastname"), result.getString("email"), result.getString("userrole"));
 				Users user = new Users();
 				user.setUserId(result.getInt("userid"));
 				user.setFirstName(result.getString("firstname"));
@@ -63,6 +64,7 @@ public class UsersDAOImpl implements UsersDAO {
 				user.setEmail(result.getString("email"));
 				user.setUsername(result.getString("username"));
 				user.setPassword(result.getString("password"));
+				
 				userID = user.getUserId();
 			}
 			return userID;		
@@ -175,6 +177,31 @@ public class UsersDAOImpl implements UsersDAO {
 			e.printStackTrace();
 		}
 		return r;
+	}
+
+	@Override
+	public Users findByUsername(String username) {
+		try(Connection conn = ConnectionUtility.getConnection()) {
+			String sql = "SELECT * FROM users WHERE username = '" + username + "';";
+			Statement statement = conn.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {    
+				Users user = new Users();
+				
+				user.setUserId(result.getInt("userid"));
+				user.setFirstName(result.getString("firstname"));
+				user.setLastName(result.getString("lastname"));
+				user.setEmail(result.getString("email"));
+				user.setUsername(result.getString("username"));
+				user.setPassword(result.getString("password"));
+				user.setRole(result.getString("userrole"));
+				
+				return user;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

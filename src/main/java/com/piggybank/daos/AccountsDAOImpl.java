@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import com.piggybank.utilities.ConnectionUtility;
 import com.piggybank.daos.AccountsDAO;
@@ -13,7 +14,7 @@ import com.piggybank.models.Users;
 public class AccountsDAOImpl implements AccountsDAO {
 
 	@Override
-	public boolean createAccount(String type) {
+	public void createAccount(String type, int UserId) {
 		try(Connection conn = ConnectionUtility.getConnection()) {
 			String sql0 = "SELECT acctid FROM account ORDER BY acctid DESC LIMIT 1;";
 			Statement statement0 = conn.createStatement();
@@ -24,28 +25,25 @@ public class AccountsDAOImpl implements AccountsDAO {
 			}
 			
 			Users user = new Users();
-			String sql = "INSERT INTO account VALUES ('" + acctID + "', 0, 'Pending', '" + type + "', '" + user.getUserId() + "', NULL);";
+			String sql = "INSERT INTO account VALUES (" + acctID + ", 0, 'Pending', '" + type + "', " + UserId + ");";
 			
 			Statement statement = conn.createStatement();
 			int i = statement.executeUpdate(sql);
-			
+/*			
 			if (i > 0) {
 				Accounts account = new Accounts();
 				account.setAccountId(acctID);
 				account.setBalance(0);
 				account.setStatus("Pending");
 				account.setType(type);
-				
-				System.out.println("Success!");
-				return true;
+
 			}
-			
+*/			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return false;
 	}
 	
 	@Override
@@ -83,5 +81,30 @@ public class AccountsDAOImpl implements AccountsDAO {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	@Override
+	public List<Accounts> findByUserId(int userId) {
+		try(Connection conn = ConnectionUtility.getConnection()) {
+			String sql = "SELECT * FROM account WHERE acctholder = " + userId + ";";
+			Statement statement = conn.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			List<Accounts> list = new ArrayList<>();
+			while (result.next()) {    
+				Accounts acct = new Accounts();
+				
+				acct.setAccountId(result.getInt("acctid"));
+				acct.setBalance(result.getDouble("acctbalance"));
+				acct.setStatus(result.getString("acctstatus"));
+				acct.setType(result.getString("accttype"));
+				
+				list.add(acct);
+
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

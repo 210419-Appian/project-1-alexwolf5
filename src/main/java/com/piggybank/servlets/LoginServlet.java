@@ -8,8 +8,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.piggybank.daos.UsersDAO;
 import com.piggybank.daos.UsersDAOImpl;
+import com.piggybank.models.Users;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -17,7 +20,7 @@ public class LoginServlet extends HttpServlet {
 	@Override			
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//This method sends and receives small amounts of unencrypted data back and forth between the browser and server
-		
+		HttpSession session = request.getSession();
 		request.getRequestDispatcher("Login.html").forward(request, response);
 			//Selects the html file viewStudent as the content to be displayed on the browser
 	}
@@ -33,12 +36,22 @@ public class LoginServlet extends HttpServlet {
 		UsersDAO login = new UsersDAOImpl();
 		
 		int result = login.loggingIn(username, password);
-	
+		
 		if (result == 0) {
 			RequestDispatcher rd = request.getRequestDispatcher("Login.html");
 			rd.include(request,  response);
 			out.print("<p style = 'color:red; text-align:center;'>Invalid Username/Password</p>");
 		} else {
+			HttpSession ses = request.getSession();
+			ses.setAttribute("username", username);
+			Users myUser = Users.findByUsername(username);
+			ses.setAttribute("password", myUser.getPassword());
+			ses.setAttribute("firstname", myUser.getFirstName());
+			ses.setAttribute("lastname", myUser.getLastName());
+			ses.setAttribute("email", myUser.getEmail());
+			ses.setAttribute("role", myUser.getRole());
+			ses.setAttribute("UserId", result);
+			
 			request.getRequestDispatcher("/UserMenu").forward(request, response);
 			//Forwards you so another servlet at the end
 		}

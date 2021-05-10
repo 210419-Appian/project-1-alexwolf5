@@ -1,6 +1,7 @@
 package com.piggybank.daos;
 
 import com.piggybank.daos.UsersDAO;
+import com.piggybank.models.Users;
 
 public interface UsersDAO {
 
@@ -12,5 +13,6 @@ public interface UsersDAO {
 	public void newLastname (int userId, String lastname);
 	public void newEmail (int userId, String email);
 	public int checkUsernameAvailability(String username);
+	public Users findByUsername(String username);
 	
 }

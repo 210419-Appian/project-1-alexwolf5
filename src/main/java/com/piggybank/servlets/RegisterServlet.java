@@ -8,13 +8,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.piggybank.daos.UsersDAO;
 import com.piggybank.daos.UsersDAOImpl;
+import com.piggybank.models.Users;
 
-/**
- * Servlet implementation class Register
- */
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,6 +35,15 @@ public class RegisterServlet extends HttpServlet {
 
 		if (usernameAv == 1){
 			reg.register(username, password, firstname, lastname, email);
+			HttpSession ses = request.getSession();
+			ses.setAttribute("username", username);
+			Users myUser = Users.findByUsername(username);
+			ses.setAttribute("password", myUser.getPassword());
+			ses.setAttribute("firstname", myUser.getFirstName());
+			ses.setAttribute("lastname", myUser.getLastName());
+			ses.setAttribute("email", myUser.getEmail());
+			ses.setAttribute("role", myUser.getRole());
+			ses.setAttribute("UserId", myUser.getUserId());
 			request.getRequestDispatcher("/UserMenu").forward(request, response);
 		}
 		else {
