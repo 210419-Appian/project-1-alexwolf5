@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import com.piggybank.utilities.ConnectionUtility;
-import com.piggybank.daos.AccountsDAO;
 import com.piggybank.models.Accounts;
 import com.piggybank.models.Users;
 
@@ -24,26 +23,22 @@ public class AccountsDAOImpl implements AccountsDAO {
 				acctID = result0.getInt("acctid") + 1;
 			}
 			
-			Users user = new Users();
 			String sql = "INSERT INTO account VALUES (" + acctID + ", 0, 'Pending', '" + type + "', " + UserId + ");";
 			
 			Statement statement = conn.createStatement();
 			int i = statement.executeUpdate(sql);
-/*			
+		
 			if (i > 0) {
 				Accounts account = new Accounts();
 				account.setAccountId(acctID);
 				account.setBalance(0);
 				account.setStatus("Pending");
 				account.setType(type);
-
 			}
-*/			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	@Override

@@ -29,10 +29,12 @@ public class AllUserServlet extends HttpServlet {
 			
 			if (checkRole.equals("User")) {
 				pw.println("Sorry, you can not access this.");
-				pw.print("<p style='text-align: center;'><a href='http://localhost:8080/rocp-project/UserMenu'>Return to Main Menu</a></p>");
+				response.setStatus(401);
+				//pw.print("<p style='text-align: center;'><a href='http://localhost:8080/rocp-project/UserMenu'>Return to Main Menu</a></p>");
 			} else {
 				pw.println(user.everyUser());
-				pw.print("<p style='text-align: center;'><a href='http://localhost:8080/rocp-project/UserMenu'>Return to Main Menu</a></p>");	
+				response.setStatus(401);
+				//pw.print("<p style='text-align: center;'><a href='http://localhost:8080/rocp-project/UserMenu'>Return to Main Menu</a></p>");	
 				}
 		} else {
 			pw.print("Please log in.");
