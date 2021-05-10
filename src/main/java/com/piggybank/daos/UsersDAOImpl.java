@@ -82,8 +82,19 @@ public class UsersDAOImpl implements UsersDAO {
 		try(Connection conn = ConnectionUtility.getConnection()) {
 			String sql = "UPDATE users SET username = '" + username + "', password = '" + password + "', firstname = '" + firstname + "', lastname = '" + lastname + "', email = '" + email + "', userrole = '" + role + "' WHERE userid = " + userId + ";";
 			Statement statement = conn.createStatement();
-			statement.executeUpdate(sql);
-			return;	
+			int i = statement.executeUpdate(sql);
+			if (i > 0) {
+				Users user = new Users();
+				
+				user.setUserId(userId);
+				user.setFirstName(firstname);
+				user.setLastName(lastname);
+				user.setEmail(email);
+				user.setUsername(username);
+				user.setPassword(password);
+				user.setRole(role);
+			}
+			return;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	

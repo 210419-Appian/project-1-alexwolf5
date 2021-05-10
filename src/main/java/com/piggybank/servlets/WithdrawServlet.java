@@ -34,7 +34,6 @@ public class WithdrawServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserService role = new UserService();
 		AccountService bal = new AccountService();
 		Transactions with = new Transactions();
 		PrintWriter pw = response.getWriter();
@@ -42,21 +41,21 @@ public class WithdrawServlet extends HttpServlet {
 		
 		if(ses != null) {
 			int acctId = Integer.parseInt(request.getParameter("acctId"));
-			double deposit = Double.parseDouble(request.getParameter("with"));
+			double withdraw = Double.parseDouble(request.getParameter("with"));
 			int UserId = (int) ses.getAttribute("UserId");
 			int checkId = bal.getAcctId(UserId);
 			
 			if (acctId == checkId) {
-					double balance = bal.getBalance(acctId);
-					double check = with.withdraw(balance, deposit, acctId);
+				double balance = bal.getBalance(acctId);
+				double check = with.withdraw(balance, withdraw, acctId);
 			
-					if (check == 0) {
-						RequestDispatcher rd = request.getRequestDispatcher("Withdraw.html");
-						rd.include(request,  response);
-						pw.print("<p style = 'color:red; text-align:center;'>Insufficient Funds</p>");
-					} else {
-						request.getRequestDispatcher("/UserMenu").forward(request, response);
-					} 
+				if (check == 0) {
+					RequestDispatcher rd = request.getRequestDispatcher("Withdraw.html");
+					rd.include(request,  response);
+					pw.print("<p style = 'color:red; text-align:center;'>Insufficient Funds</p>");
+				} else {
+					request.getRequestDispatcher("/UserMenu").forward(request, response);
+				} 
 			} else {
 				request.getRequestDispatcher("/UserMenu").forward(request, response);
 			}

@@ -31,7 +31,6 @@ public class DepositServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserService role = new UserService();
 		AccountService bal = new AccountService();
 		Transactions depo = new Transactions();
 		PrintWriter pw = response.getWriter();

@@ -44,15 +44,11 @@ public class TransferServlet extends HttpServlet {
 			if (acct1 == checkId) {
 				int acct2 = Integer.parseInt(request.getParameter("acctId2"));
 				double transfer = Double.parseDouble(request.getParameter("tran"));
-				double balance = bal.getBalance(acct1);
-				double check = tran.transfer(balance, transfer, acct1, acct2);
-				if (check == 0) {
-					RequestDispatcher rd = request.getRequestDispatcher("Transfer.html");
-					rd.include(request,  response);
-					pw.print("<p style = 'color:red; text-align:center;'>Insufficient Funds</p>");
-				} else {
-					request.getRequestDispatcher("/UserMenu").forward(request, response);
-				}
+				double balance1 = bal.getBalance(acct1);
+				double balance2 = bal.getBalance(acct2);
+				tran.transfer(balance1, balance2, transfer, acct1, acct2);
+				request.getRequestDispatcher("/UserMenu").forward(request, response);
+	
 			} else {
 				request.getRequestDispatcher("/UserMenu").forward(request, response);
 			}

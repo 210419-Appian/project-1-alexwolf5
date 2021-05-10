@@ -68,19 +68,18 @@ public class AccountsDAOImpl implements AccountsDAO {
 	@Override
 	public boolean transfer(double transferamount, int acct1Giver, int acct2Taker) {
 		try(Connection conn = ConnectionUtility.getConnection()) {
-			String sql = "UPDATE account SET acctbalance = acctbalance - " + transferamount + " WHERE acctid = " + acct1Giver + "; UPDATE account SET acctbalance = acctbalance + " + transferamount + " WHERE acctid = " + acct2Taker + ";";
+			String sql = "UPDATE account SET acctbalance = acctbalance - " + transferamount + " WHERE acctid = " + acct1Giver + ";";
 			Statement statement = conn.createStatement();
-			int i = statement.executeUpdate(sql);
-			if (i > 0) {
-				return true;
-			}
-			else {
-				return false;
-			}
+			statement.executeUpdate(sql);
+			
+			String sql2 = "UPDATE account SET acctbalance = acctbalance + " + transferamount + " WHERE acctid = " + acct2Taker + ";";
+			Statement statement2 = conn.createStatement();
+			statement2.executeUpdate(sql2);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return false;
+		return true;
 	}
 
 	@Override

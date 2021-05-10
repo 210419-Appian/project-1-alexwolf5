@@ -15,34 +15,29 @@ public class Transactions {
 	}
 	
 	public double withdraw(double balance, double withdraw, int acctId) {
-		
-		double checkBalance = balance;
-		checkBalance -= withdraw;
-		if (checkBalance >= 0) {
+		if (withdraw < balance) {
 			
 			balance -= withdraw;
 			AccountsDAO with = new AccountsDAOImpl();
 			with.updateBalance(acctId, balance);
 			return balance;
-		}
-		
-		else {
+		} else {
 			return 0;
 		}
 	}
 	
-	public double transfer(double balance, double transfer, int acctIdDec, int acctIdInc) {
+	public void transfer(double balance1, double balance2, double transfer, int acctIdDec, int acctIdInc) {
 		
-		double checkBalance = balance;
-		checkBalance -= transfer;
-		if (checkBalance >= 0) {
+		if (transfer < balance1) {
+			
+			balance1 -= transfer;
+			balance2 += transfer;
 			AccountsDAO tran = new AccountsDAOImpl();
-			tran.transfer(transfer, acctIdDec, acctIdInc);
-			balance -= transfer;
-			return balance;
-		}
-		else {
-		return 0;
+			tran.updateBalance(acctIdDec, balance1);
+			tran.updateBalance(acctIdInc, balance2);
+			return;
+		} else {
+			return;
 		}
 	}
 }
