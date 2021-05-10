@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.piggybank.daos.UsersDAO;
 import com.piggybank.daos.UsersDAOImpl;
 import com.piggybank.models.Users;
+import com.piggybank.services.UserService;
 
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,14 +31,14 @@ public class RegisterServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		UsersDAO reg = new UsersDAOImpl();
+		UserService reg = new UserService();
 		int usernameAv = reg.checkUsernameAvailability(username);
 
 		if (usernameAv == 1){
 			reg.register(username, password, firstname, lastname, email);
 			HttpSession ses = request.getSession();
 			ses.setAttribute("username", username);
-			Users myUser = Users.findByUsername(username);
+			Users myUser = UserService.findByUsername(username);
 			ses.setAttribute("password", myUser.getPassword());
 			ses.setAttribute("firstname", myUser.getFirstName());
 			ses.setAttribute("lastname", myUser.getLastName());

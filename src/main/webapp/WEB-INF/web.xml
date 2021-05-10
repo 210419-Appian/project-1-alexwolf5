@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="4.0"
-	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaeehttp://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="4.0">
   <display-name>HelloServlets</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -69,5 +66,55 @@
   <servlet-mapping>
     <servlet-name>CreateAccountServlet</servlet-name>
     <url-pattern>/CreateAccount</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DepositServlet</display-name>
+    <servlet-name>DepositServlet</servlet-name>
+    <servlet-class>com.piggybank.servlets.DepositServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DepositServlet</servlet-name>
+    <url-pattern>/Deposit</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>WithdrawServlet</display-name>
+    <servlet-name>WithdrawServlet</servlet-name>
+    <servlet-class>com.piggybank.servlets.WithdrawServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WithdrawServlet</servlet-name>
+    <url-pattern>/Withdraw</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>TransferServlet</display-name>
+    <servlet-name>TransferServlet</servlet-name>
+    <servlet-class>com.piggybank.servlets.TransferServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TransferServlet</servlet-name>
+    <url-pattern>/Transfer</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LogoutServlet</display-name>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>com.piggybank.servlets.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ChangeInfoServlet</display-name>
+    <servlet-name>ChangeInfoServlet</servlet-name>
+    <servlet-class>com.piggybank.servlets.ChangeInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangeInfoServlet</servlet-name>
+    <url-pattern>/ChangeInfo</url-pattern>
   </servlet-mapping>
 </web-app>

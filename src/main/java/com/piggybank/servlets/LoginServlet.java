@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.piggybank.daos.UsersDAO;
 import com.piggybank.daos.UsersDAOImpl;
 import com.piggybank.models.Users;
+import com.piggybank.services.UserService;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -33,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		UsersDAO login = new UsersDAOImpl();
+		UserService login = new UserService();
 		
 		int result = login.loggingIn(username, password);
 		
@@ -44,13 +45,13 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			HttpSession ses = request.getSession();
 			ses.setAttribute("username", username);
-			Users myUser = Users.findByUsername(username);
+			Users myUser = UserService.findByUsername(username);
 			ses.setAttribute("password", myUser.getPassword());
 			ses.setAttribute("firstname", myUser.getFirstName());
 			ses.setAttribute("lastname", myUser.getLastName());
 			ses.setAttribute("email", myUser.getEmail());
 			ses.setAttribute("role", myUser.getRole());
-			ses.setAttribute("UserId", result);
+			ses.setAttribute("UserId", myUser.getUserId());
 			
 			request.getRequestDispatcher("/UserMenu").forward(request, response);
 			//Forwards you so another servlet at the end

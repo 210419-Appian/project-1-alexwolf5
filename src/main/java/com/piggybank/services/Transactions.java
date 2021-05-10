@@ -27,8 +27,7 @@ public class Transactions {
 		}
 		
 		else {
-			//Add notification that transaction wasn't completed
-			return balance;
+			return 0;
 		}
 	}
 	
@@ -38,18 +37,12 @@ public class Transactions {
 		checkBalance -= transfer;
 		if (checkBalance >= 0) {
 			AccountsDAO tran = new AccountsDAOImpl();
-			boolean result = tran.transfer(transfer, acctIdDec, acctIdInc);
-			if (result == true) {
-				
-			}
+			tran.transfer(transfer, acctIdDec, acctIdInc);
 			balance -= transfer;
-			Accounts acct = new Accounts();
-			acct.setBalance(balance); 
 			return balance;
 		}
 		else {
-		//Add notification that transaction wasn't completed
-		return balance;
+		return 0;
 		}
 	}
 }

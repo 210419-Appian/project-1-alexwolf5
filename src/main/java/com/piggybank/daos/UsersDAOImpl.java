@@ -204,4 +204,19 @@ public class UsersDAOImpl implements UsersDAO {
 		return null;
 	}
 
+	@Override
+	public String getRole(int userId) {
+		try(Connection conn = ConnectionUtility.getConnection()) {
+			String sql = "SELECT userrole FROM users WHERE userid = " + userId + ";";
+			Statement statement = conn.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {
+				return result.getString("userrole");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

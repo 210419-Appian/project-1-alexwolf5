@@ -107,4 +107,34 @@ public class AccountsDAOImpl implements AccountsDAO {
 		}
 		return null;
 	}
+
+	@Override
+	public double getBalance(int acctId) {
+		try(Connection conn = ConnectionUtility.getConnection()) {
+			String sql = "SELECT acctbalance FROM account WHERE acctid = " + acctId + ";";
+			Statement statement = conn.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {    
+				return result.getDouble("acctbalance");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	public int getAcctId(int UserId) {
+		try(Connection conn = ConnectionUtility.getConnection()) {
+			String sql = "SELECT acctid FROM account WHERE acctholder = " + UserId + ";";
+			Statement statement = conn.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {    
+				return result.getInt("acctid");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }

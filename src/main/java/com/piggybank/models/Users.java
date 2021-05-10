@@ -1,8 +1,5 @@
 package com.piggybank.models;
 
-import com.piggybank.daos.UsersDAO;
-import com.piggybank.daos.UsersDAOImpl;
-
 public class Users {
 		  
 	private int userId; // primary key
@@ -12,13 +9,6 @@ public class Users {
 	private String lastName; // not null
 	private String email; // not null
 	private String role;
-	
-	static UsersDAO udao = new UsersDAOImpl();
-	
-	public static Users findByUsername(String username) {
-		
-		return udao.findByUsername(username);
-	}
 	
 	public Users() {
 		super();

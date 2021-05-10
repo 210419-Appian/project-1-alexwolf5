@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.piggybank.models.Users;
+import com.piggybank.services.UserService;
 
 /**
  * Servlet implementation class UserInfoServlet
@@ -23,7 +24,7 @@ public class UserInfoServlet extends HttpServlet {
 		HttpSession ses = request.getSession(false);
 		if(ses != null) {
 			String username = (String) ses.getAttribute("username");
-			Users user = Users.findByUsername(username);
+			Users user = UserService.findByUsername(username);
 			pw.println("<p style='text-align: center;'>" + user + "</p>");	
 			pw.println("<p style='text-align: center;'><a href= 'http://localhost:8080/rocp-project/UserMenu'>Click here to return to main menu</p>");
 			

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.piggybank.daos.AccountsDAO;
 import com.piggybank.daos.AccountsDAOImpl;
 import com.piggybank.models.Accounts;
+import com.piggybank.services.AccountService;
 
 /**
  * Servlet implementation class CreateAccountServlet
@@ -32,7 +33,7 @@ public class CreateAccountServlet extends HttpServlet {
 		if(ses != null) {
 			String type = request.getParameter("type");
 			int userId = (int) ses.getAttribute("UserId");
-			AccountsDAO create = new AccountsDAOImpl();
+			AccountService create = new AccountService();
 			create.createAccount(type, userId);
 			request.getRequestDispatcher("/UserMenu").forward(request, response);
 		} else {

@@ -1,25 +1,11 @@
 package com.piggybank.models;
 
-import java.util.List;
-
-import com.piggybank.daos.AccountsDAO;
-import com.piggybank.daos.AccountsDAOImpl;
-import com.piggybank.daos.UsersDAO;
-import com.piggybank.daos.UsersDAOImpl;
-
 public class Accounts {
 
 	private int accountId; // primary key
 	private double balance;  // not null
 	private String status;
 	private String type;
-	
-	static AccountsDAO adao = new AccountsDAOImpl();
-	
-	public static List<Accounts> findByUserId(int userId) {
-		
-		return adao.findByUserId(userId);
-	}
 	
 	public Accounts() {
 		super();

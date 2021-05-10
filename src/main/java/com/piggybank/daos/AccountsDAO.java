@@ -11,4 +11,6 @@ public interface AccountsDAO {
 	public boolean updateBalance(int acctId, double balance);
 	public boolean transfer(double transferamount, int acct1Giver, int acct2Taker);
 	public List<Accounts> findByUserId(int userId);
+	public double getBalance(int acctId);
+	public int getAcctId(int UserId);
 }

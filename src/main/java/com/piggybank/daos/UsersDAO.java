@@ -14,5 +14,6 @@ public interface UsersDAO {
 	public void newEmail (int userId, String email);
 	public int checkUsernameAvailability(String username);
 	public Users findByUsername(String username);
+	public String getRole(int userId);
 	
 }
