@@ -117,4 +117,24 @@
     <servlet-name>ChangeInfoServlet</servlet-name>
     <url-pattern>/ChangeInfo</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AllUserServlet</display-name>
+    <servlet-name>AllUserServlet</servlet-name>
+    <servlet-class>com.piggybank.servlets.AllUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AllUserServlet</servlet-name>
+    <url-pattern>/AllUsers</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AllAccountsServlet</display-name>
+    <servlet-name>AllAccountsServlet</servlet-name>
+    <servlet-class>com.piggybank.servlets.AllAccountsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AllAccountsServlet</servlet-name>
+    <url-pattern>/AllAccounts</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -1,5 +1,7 @@
 package com.piggybank.services;
 
+import java.util.List;
+
 import com.piggybank.daos.UsersDAO;
 import com.piggybank.daos.UsersDAOImpl;
 import com.piggybank.models.Users;
@@ -30,5 +32,9 @@ public class UserService {
 	
 	public void newDetails (int userId, String username, String password, String firstname, String lastname, String email, String role) {
 		udao.newDetails(userId, username, password, firstname, lastname, email, role);
+	}
+	
+	public List<Users> everyUser(){
+		return udao.everyUser();
 	}
 }

@@ -13,4 +13,5 @@ public interface AccountsDAO {
 	public List<Accounts> findByUserId(int userId);
 	public double getBalance(int acctId);
 	public int getAcctId(int UserId);
+	public List<Accounts> everyAcct();
 }

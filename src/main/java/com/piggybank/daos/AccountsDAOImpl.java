@@ -137,4 +137,29 @@ public class AccountsDAOImpl implements AccountsDAO {
 		}
 		return 0;
 	}
+
+	@Override
+	public List<Accounts> everyAcct() {
+		try(Connection conn = ConnectionUtility.getConnection()) {
+			String sql = "SELECT * FROM account;";
+			Statement statement = conn.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			List<Accounts> list = new ArrayList<>();
+			while (result.next()) {
+				Accounts acct = new Accounts();
+				
+				acct.setAccountId(result.getInt("acctid"));
+				acct.setBalance(result.getDouble("acctbalance"));
+				acct.setStatus(result.getString("acctstatus"));
+				acct.setType(result.getString("accttype"));
+				
+				list.add(acct);
+			}
+			return list;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

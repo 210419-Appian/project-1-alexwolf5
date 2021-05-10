@@ -39,7 +39,7 @@ public class ChangeInfoServlet extends HttpServlet {
 			int checkId = (int) ses.getAttribute("UserId");
 			String checkRole = (String) ses.getAttribute("role");
 			
-			if (checkRole == "Admin" || UserId == checkId) {
+			if (checkRole.equals("Admin") || UserId == checkId) {
 				String username = request.getParameter("username");
 				String password = request.getParameter("password");
 				String firstname = request.getParameter("firstname");
@@ -51,11 +51,6 @@ public class ChangeInfoServlet extends HttpServlet {
 			} else {
 				request.getRequestDispatcher("/UserMenu").forward(request, response);
 			}
-			
-			
-			
-			
-			
 			
 		} else {
 			pw.print("Please log in.");

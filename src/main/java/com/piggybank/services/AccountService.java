@@ -26,4 +26,8 @@ public class AccountService {
 	public int getAcctId(int UserId) {
 		return adao.getAcctId(UserId);
 	}
+	
+	public List<Accounts> everyAcct(){
+		return adao.everyAcct();
+	}
 }
